@@ -20,7 +20,7 @@ const Review = () => {
           </p>
           <span>⭐⭐⭐⭐⭐</span>
           <div className="flex gap-2">
-            <span>Name: Jane Doe</span>
+            <span>Name: Fatmata </span>
           </div>
         </div>
         <div className=" rounded-md p-3 space-y-4 bg-white">
@@ -30,7 +30,7 @@ const Review = () => {
           </p>
           <span>⭐⭐⭐⭐⭐</span>
           <div className="flex gap-2">
-            <span>Name: Lans Kaba</span>
+            <span>Name: Abu</span>
           </div>
         </div>
         <div className=" rounded-md p-3 space-y-4 bg-white">
@@ -40,7 +40,7 @@ const Review = () => {
           </p>
           <span>⭐⭐⭐⭐⭐</span>
           <div className="flex gap-2">
-            <span>Name: Jane Doe</span>
+            <span>Name: Amabin</span>
           </div>
         </div>
         <div className=" rounded-md p-3 space-y-4 bg-white">
@@ -50,7 +50,7 @@ const Review = () => {
           </p>
           <span>⭐⭐⭐⭐⭐</span>
           <div className="flex gap-2">
-            <span>Name: Jane Doe</span>
+            <span>Name: Amie</span>
           </div>
         </div>
       </div>
