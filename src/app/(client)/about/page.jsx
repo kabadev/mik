@@ -22,10 +22,10 @@ const page = () => {
             </h2>
           </div>
           <p className="leading-[1.6]">
-            ChatGPT MIK Palm Oil is a company established in 2024 by three
-            sisters: Mariama, Isatu, and Kadiatu. The company was founded with
-            the vision of producing and distributing high-quality palm oil. MIK
-            Palm Oil stands out for its unparalleled quality and dedication to
+            MIK Palm Oil is a company established in 2024 by three sisters:
+            Mariama, Isatu, and Kadiatu. The company was founded with the vision
+            of producing and distributing high-quality palm oil. MIK Palm Oil
+            stands out for its unparalleled quality and dedication to
             sustainability. Our palm oil is extracted from the finest palm
             fruits, ensuring a rich, natural flavor that elevates any dish. We
             adhere to strict environmental standards, promoting sustainable
