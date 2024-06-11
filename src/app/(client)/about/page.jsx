@@ -7,7 +7,7 @@ const page = () => {
       <div className="md:flex gap-5 p-3 md:p-20 bg-slate-100">
         <div className="md:w-1/2">
           <Image
-            src="/team.png"
+            src="/mikme.png"
             className="rounded-2xl"
             alt="Banner"
             height={1000}
