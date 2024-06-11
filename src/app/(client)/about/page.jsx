@@ -7,7 +7,7 @@ const page = () => {
       <div className="md:flex gap-5 p-3 md:p-20 bg-slate-100">
         <div className="md:w-1/2">
           <Image
-            src="/image.png"
+            src="/team.png"
             className="rounded-2xl"
             alt="Banner"
             height={1000}
@@ -22,8 +22,11 @@ const page = () => {
             </h2>
           </div>
           <p className="leading-[1.6]">
-            MIK Palm Oil stands out for its unparalleled quality and dedication
-            to sustainability. Our palm oil is extracted from the finest palm
+            ChatGPT MIK Palm Oil is a company established in 2024 by three
+            sisters: Mariama, Isatu, and Kadiatu. The company was founded with
+            the vision of producing and distributing high-quality palm oil. MIK
+            Palm Oil stands out for its unparalleled quality and dedication to
+            sustainability. Our palm oil is extracted from the finest palm
             fruits, ensuring a rich, natural flavor that elevates any dish. We
             adhere to strict environmental standards, promoting sustainable
             farming and fair trade practices to support local communities and
@@ -33,15 +36,17 @@ const page = () => {
       </div>
       <div className="p-3 md:p-20 bg-white">
         <div className=" mx-auto">
-          <p className="text-lg mb-4">
-            MIK Palm Oil prides itself on its exceptional quality and unwavering
-            commitment to sustainability. Our palm oil is meticulously sourced
-            from the choicest palm fruits, guaranteeing a premium product with a
-            distinct, natural taste that enhances the essence of every culinary
-            creation.
-          </p>
-          <p className="text-lg mb-4">
-            {` Committed to environmental stewardship, we uphold rigorous standards
+          <div className="flex max-md:flex-col gap-5 items-center">
+            <div className="md:w-1/2">
+              <p className="text-lg mb-4">
+                MIK Palm Oil prides itself on its exceptional quality and
+                unwavering commitment to sustainability. Our palm oil is
+                meticulously sourced from the choicest palm fruits, guaranteeing
+                a premium product with a distinct, natural taste that enhances
+                the essence of every culinary creation.
+              </p>
+              <p className="text-lg mb-4">
+                {` Committed to environmental stewardship, we uphold rigorous standards
             that prioritize sustainability at every stage of production. By
             advocating for sustainable farming techniques and fostering fair
             trade practices, we not only bolster local economies but also
@@ -50,7 +55,16 @@ const page = () => {
             balance between progress and preservation, ensuring that future
             generations can continue to reap the benefits of our planet's
             resources.`}
-          </p>
+              </p>
+            </div>
+            <Image
+              src="/image.png"
+              className="rounded-2xl md:w-1/2"
+              alt="Banner"
+              height={1000}
+              width={1000}
+            />
+          </div>
 
           <div className="md:flex gap-6 mt-10">
             <div className="md:w-1/2 p-4 bg-primary rounded-lg text-white mb-6">

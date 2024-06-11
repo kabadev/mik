@@ -18,7 +18,7 @@ const page = () => {
               Feel free to contact us with any questions or inquiries:
             </p>
             <p className="text-lg mb-4">Email: info@mikpalmoil.com</p>
-            <p className="text-lg mb-4">Phone: +232-456-7890</p>
+            <p className="text-lg mb-4">Phone: +232-76-542-256</p>
             <p className="text-lg mb-4">
               Address: 13B wilkinson road, Freetown, Sierra Leone
             </p>

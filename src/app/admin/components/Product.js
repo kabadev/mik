@@ -226,14 +226,15 @@ export default function Product({
                 className="w-[350px] h-auto  gap-2 flex  justify-between align-items-center"
               >
                 {images?.map((link, index) => (
-                  <div key={link} className="relative group">
-                    <Image
+                  <div key={index} className="relative group">
+                    <img
                       height={100}
                       width={100}
                       src={link}
                       alt="image"
                       className="object-cover h-32 w-44 rounded-md border p-2 cursor-pointer transition-transform transform-gpu group-hover:scale-105"
                     />
+
                     <div className="absolute top-2 right-2 cursor-pointer opacity-0 group-hover:opacity-100">
                       <button onClick={() => handleDeleteImage(index)}>
                         <svg
