@@ -93,7 +93,7 @@ const Features = () => {
           </div>
           <div className="mt-[30px] ">
             <Link
-              href={"#"}
+              href={"/products"}
               className="text px-10 py-3 rounded-3xl bg-primary text-white"
             >
               Shop now

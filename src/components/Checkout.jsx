@@ -8,6 +8,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
+import ReactInputMask from "react-input-mask";
+import { Circle, CircleCheckBig } from "lucide-react";
 
 const Checkout = () => {
   const { user } = useUser();
@@ -26,6 +28,7 @@ const Checkout = () => {
   const [cvc, setCvc] = useState("");
 
   const [errors, setErrors] = useState({});
+  const [paymentMethod, setPaymentMethod] = useState("card");
 
   const validateForm = () => {
     let formErrors = {};
@@ -71,8 +74,6 @@ const Checkout = () => {
       console.error("Error placing order:", error);
     }
   };
-
-  console.log(user);
 
   return (
     <>
@@ -181,57 +182,155 @@ const Checkout = () => {
                   <div>
                     <h3 className="text-lg font-medium">{product.name}</h3>
                     <p className="text-sm">Quantity: {product.quantity}</p>
-                    <p className="text-sm">Price: ${product.price}</p>
+                    <p className="text-sm">Price: NLE{product.price}</p>
                   </div>
                 </div>
               ))}
             </div>
             <h2 className="text-xl font-semibold mt-8 mb-4">Payment Details</h2>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium">Card Number</label>
-                <input
-                  type="text"
-                  value={cardNumber}
-                  onChange={(e) => setCardNumber(e.target.value)}
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm border p-3"
-                />
-                {errors.cardNumber && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.cardNumber}
-                  </p>
-                )}
+
+            <div className="flex gap-2 mb-4 ">
+              <div
+                className="p-2 h-14 border flex gap-1 items-center cursor-pointer"
+                onClick={() => setPaymentMethod("card")}
+              >
+                {paymentMethod === "card" ? <CircleCheckBig /> : <Circle />}
+                <Image src="/card.png" alt="card" width={100} height={100} />
               </div>
-              <div>
-                <label className="block text-sm font-medium">
-                  Expiration Date
-                </label>
-                <input
-                  type="text"
-                  value={expirationDate}
-                  onChange={(e) => setExpirationDate(e.target.value)}
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm border p-3"
-                  placeholder="MM/YY"
-                />
-                {errors.expirationDate && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.expirationDate}
-                  </p>
-                )}
+              <div
+                className="p-2 h-14 border flex gap-1 items-center cursor-pointer"
+                onClick={() => setPaymentMethod("momo")}
+              >
+                {paymentMethod === "momo" ? <CircleCheckBig /> : <Circle />}
+                <div className="flex gap-1 overflow-hidden h-full">
+                  <Image
+                    src="/orange.png"
+                    alt="card"
+                    width={100}
+                    height={100}
+                    className="object-cover"
+                  />
+                  <Image src="/afi.png" alt="card" width={100} height={100} />
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium">CVC</label>
-                <input
-                  type="text"
-                  value={cvc}
-                  onChange={(e) => setCvc(e.target.value)}
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm border p-3"
-                />
-                {errors.cvc && (
-                  <p className="text-red-500 text-sm mt-1">{errors.cvc}</p>
-                )}
+              <div
+                className="p-2 h-14 border flex gap-1 items-center cursor-pointer"
+                onClick={() => setPaymentMethod("cash")}
+              >
+                {paymentMethod === "cash" ? <CircleCheckBig /> : <Circle />}
+                <div className="flex gap-1 overflow-hidden h-full">
+                  <Image
+                    src="/cashs.png"
+                    alt="card"
+                    width={100}
+                    height={100}
+                    className="object-cover"
+                  />
+                </div>
               </div>
-            </form>
+            </div>
+            <hr />
+            {paymentMethod === "card" && (
+              <div className="mt-4">
+                <form className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium">
+                      Card Number
+                    </label>
+
+                    <ReactInputMask
+                      mask="9999 9999 9999 9999"
+                      value={cardNumber}
+                      onChange={(e) => setCardNumber(e.target.value)}
+                      className="mt-1 block w-full border-gray-300 rounded-md shadow-sm border p-3"
+                      required
+                    />
+                    {errors.cardNumber && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.cardNumber}
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium">
+                      Expiration Date
+                    </label>
+
+                    <ReactInputMask
+                      mask="99/99"
+                      value={expirationDate}
+                      onChange={(e) => setExpirationDate(e.target.value)}
+                      className="mt-1 block w-full border-gray-300 rounded-md shadow-sm border p-3"
+                      placeholder="MM/YY"
+                      required
+                    />
+                    {errors.expirationDate && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.expirationDate}
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium">CVC</label>
+                    <ReactInputMask
+                      mask="999"
+                      value={cvc}
+                      onChange={(e) => setCvc(e.target.value)}
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      required
+                    />
+                    {errors.cvc && (
+                      <p className="text-red-500 text-sm mt-1">{errors.cvc}</p>
+                    )}
+                  </div>
+                </form>
+              </div>
+            )}
+            {paymentMethod === "momo" && (
+              <div className="mt-4">
+                <h3 className="text-2xl font-bold">Oops...</h3>
+                <h3>Sorry Mobile money is not available right now.</h3>
+                <p>
+                  We are trying to fix it as soon as possible. Please select
+                  other payment method.
+                </p>
+                <div className="flex gap-1 overflow-hidden h-full">
+                  <Image
+                    src="/orange.png"
+                    alt="card"
+                    width={100}
+                    height={100}
+                    className=""
+                  />
+                  <Image
+                    src="/afi.png"
+                    alt="card"
+                    width={100}
+                    height={100}
+                    className=""
+                  />
+                </div>
+              </div>
+            )}
+            {paymentMethod === "cash" && (
+              <div className="mt-4">
+                <h3 className="text-2xl font-bold">Cash on Delivery</h3>
+
+                <p>
+                  Thank you for choosing Cash on Delivery. Pay in cash to the
+                  delivery person. Please have the exact amount ready.
+                </p>
+                <div className="flex gap-1 overflow-hidden h-full">
+                  <Image
+                    src="/cashs.png"
+                    alt="card"
+                    width={100}
+                    height={100}
+                    className=""
+                  />
+                </div>
+              </div>
+            )}
             <button
               className="mt-6 w-full bg-primary  text-white py-3 rounded-md hover:bg-primary/60 transition duration-200"
               onClick={handlePlaceOrder}

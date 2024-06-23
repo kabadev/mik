@@ -30,7 +30,7 @@ const About = () => {
         </p>
         <div className="mt-[30px] ">
           <Link
-            href={"#"}
+            href={"/about"}
             className="text px-10 py-3 rounded-3xl bg-primary text-white"
           >
             Learn more

@@ -27,7 +27,7 @@ export async function POST(request) {
 export async function GET() {
   await mongooseConnect();
   try {
-    const orders = await Order.find();
+    const orders = await Order.find().sort({ createdAt: -1 });
 
     const response = NextResponse.json(
       {
