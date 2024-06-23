@@ -12,6 +12,7 @@ import ReactInputMask from "react-input-mask";
 import { Circle, CircleCheckBig } from "lucide-react";
 
 const Checkout = () => {
+  const [paymentMethod, setPaymentMethod] = useState("card");
   const { user } = useUser();
   const { cart, clearCart } = useProducts();
   const router = useRouter();
@@ -28,7 +29,6 @@ const Checkout = () => {
   const [cvc, setCvc] = useState("");
 
   const [errors, setErrors] = useState({});
-  const [paymentMethod, setPaymentMethod] = useState("card");
 
   const validateForm = () => {
     let formErrors = {};
@@ -38,13 +38,20 @@ const Checkout = () => {
     if (!city) formErrors.city = "City is required";
     if (!country) formErrors.country = "Country is required";
     if (!postalCode) formErrors.postalCode = "Postal code is required";
-    if (!cardNumber) formErrors.cardNumber = "Card number is required";
-    if (!expirationDate)
-      formErrors.expirationDate = "Expiration date is required";
-    if (!cvc) formErrors.cvc = "CVC is required";
+    if (paymentMethod === "card") {
+      if (!cardNumber) formErrors.cardNumber = "Card number is required";
+      if (!expirationDate)
+        formErrors.expirationDate = "Expiration date is required";
+      if (!cvc) formErrors.cvc = "CVC is required";
+    } else {
+      if (!cardNumber) formErrors.cardNumber = "";
+      if (!expirationDate) formErrors.expirationDate = "";
+      if (!cvc) formErrors.cvc = "";
+    }
     return formErrors;
   };
 
+  const [isloading, setIsloading] = useState(false);
   const handlePlaceOrder = async () => {
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
@@ -66,13 +73,30 @@ const Checkout = () => {
     };
 
     try {
+      setIsloading(true);
       //   console.log(orderDetails.products);
       const response = await axios.post("/api/order", orderDetails);
       clearCart();
+      setIsloading(false);
       router.push("/success");
     } catch (error) {
+      setIsloading(true);
       console.error("Error placing order:", error);
     }
+  };
+
+  const setFakeCards = (method) => {
+    setPaymentMethod(method);
+    setCardNumber("233");
+    setExpirationDate("233");
+    setCvc("233");
+  };
+
+  const setForCard = () => {
+    setPaymentMethod("card");
+    setCardNumber("");
+    setExpirationDate("");
+    setCvc("");
   };
 
   return (
@@ -192,14 +216,14 @@ const Checkout = () => {
             <div className="flex gap-2 mb-4 ">
               <div
                 className="p-2 h-14 border flex gap-1 items-center cursor-pointer"
-                onClick={() => setPaymentMethod("card")}
+                onClick={setForCard}
               >
                 {paymentMethod === "card" ? <CircleCheckBig /> : <Circle />}
                 <Image src="/card.png" alt="card" width={100} height={100} />
               </div>
               <div
                 className="p-2 h-14 border flex gap-1 items-center cursor-pointer"
-                onClick={() => setPaymentMethod("momo")}
+                onClick={() => setFakeCards("momo")}
               >
                 {paymentMethod === "momo" ? <CircleCheckBig /> : <Circle />}
                 <div className="flex gap-1 overflow-hidden h-full">
@@ -215,7 +239,7 @@ const Checkout = () => {
               </div>
               <div
                 className="p-2 h-14 border flex gap-1 items-center cursor-pointer"
-                onClick={() => setPaymentMethod("cash")}
+                onClick={() => setFakeCards("cash")}
               >
                 {paymentMethod === "cash" ? <CircleCheckBig /> : <Circle />}
                 <div className="flex gap-1 overflow-hidden h-full">
@@ -331,12 +355,15 @@ const Checkout = () => {
                 </div>
               </div>
             )}
-            <button
-              className="mt-6 w-full bg-primary  text-white py-3 rounded-md hover:bg-primary/60 transition duration-200"
-              onClick={handlePlaceOrder}
-            >
-              Place Order
-            </button>
+            {paymentMethod !== "momo" && (
+              <button
+                className="mt-6 w-full bg-primary disabled:cursor-not-allowed text-white py-3 rounded-md hover:bg-primary/60 transition duration-200"
+                onClick={handlePlaceOrder}
+                disabled={isloading}
+              >
+                {isloading ? "Processing...." : "Place Order"}
+              </button>
+            )}
           </div>
         </div>
       </div>
