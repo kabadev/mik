@@ -23,7 +23,8 @@ const Review = () => {
             <span>Name: Fatmata </span>
           </div>
         </div>
-        <div className=" rounded-md p-3 space-y-4 bg-white">
+        <div className=" rounded-md p-3 space-y-4 
+        bg-white">
           <p>
             {`I love that it's sustainably sourced. Great quality too! I use it in
             all my baking recipes`}

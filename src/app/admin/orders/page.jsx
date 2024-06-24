@@ -43,6 +43,10 @@ const Orders = () => {
                 </h3>
                 <h3 className="text-md font-medium mb-2">City: {order.city}</h3>
                 <h3 className="text-gray-600 mb-2">Zip Code: {order.zip}</h3>
+                <h3 className="text-gray-600 mb-2">
+                  Payment Method:{" "}
+                  {order.cvc === "233" ? "Cash On Delivery" : "Card Payment"}
+                </h3>
               </div>
             </div>
             <div className="overflow-x-auto">
