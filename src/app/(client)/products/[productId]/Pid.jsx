@@ -92,7 +92,9 @@ export default function Pid({ params }) {
           {/* Product Details */}
           <div>
             <h1 className="text-3xl font-bold mb-4">{productInfo?.title}</h1>
-            <p className="text-xl text-gray-800 mb-4">${productInfo?.price}</p>
+            <p className="text-xl text-gray-800 mb-4">
+              NLE {productInfo?.price}
+            </p>
             <button
               onClick={() => addToCartHandler(productInfo)}
               className="bg-primary text-white py-2 px-4 rounded hover:bg-primary"
